@@ -8,16 +8,27 @@ class AuthService {
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _googleSignIn = googleSignin ?? GoogleSignIn();
 
+  Stream<User> get user => _firebaseAuth.authStateChanges();
+
   void authStateChanges() {
     _firebaseAuth.authStateChanges().listen((User user) {
       if (user == null) {
-        // ignore: avoid_print
         print('User is currently signed out!');
       } else {
-        // ignore: avoid_print
         print('User is signed in!');
       }
     });
+  }
+
+  Future<void> signOut() async {
+    try {
+      print("firebase User Sign Out");
+      await _googleSignIn.disconnect();
+      await _googleSignIn.signOut();
+      return await _firebaseAuth.signOut();
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> signInWithGoogle() async {
@@ -77,29 +88,23 @@ class AuthService {
           .createUserWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        // ignore: avoid_print
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        // ignore: avoid_print
         print('The account already exists for that email.');
       }
     } catch (e) {
-      // ignore: avoid_print
       print(e.toString());
     }
   }
 
   Future<void> signInWithEmailAndPassword(String email, String password) async {
     try {
-      // ignore: unused_local_variable
       final UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        // ignore: avoid_print
         print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        // ignore: avoid_print
         print('Wrong password provided for that user.');
       }
     }
