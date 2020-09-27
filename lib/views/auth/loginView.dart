@@ -6,21 +6,22 @@ import 'package:walktron/controllers/controllers.dart';
 class LoginView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.white,
       body: Column(
         children: [
           Expanded(
-            // flex: ,
+            flex: 4,
             child: Stack(
-              alignment: Alignment.topLeft,
+              alignment: Alignment.center,
               children: [
                 ClipPath(
                   clipper: WaveClipper2(),
                   child: Container(
                     width: double.infinity,
-                    // height: 300,
+                    // height: size.height * 0.3,
                     decoration: const BoxDecoration(
                         gradient: LinearGradient(
                             colors: [Color(0x22ff3a5a), Color(0x22fe494d)])),
@@ -31,208 +32,215 @@ class LoginView extends GetView<AuthController> {
                   child: Container(
                     width: double.infinity,
                     // height: 300,
+                    // height: size.height * 0.3,
                     decoration: const BoxDecoration(
                         gradient: LinearGradient(
                             colors: [Color(0x44ff3a5a), Color(0x44fe494d)])),
                   ),
                 ),
-                Positioned(
-                  // top: 40,
-                  // height: 40,
-                  child: ClipPath(
-                    clipper: WaveClipper1(),
-                    child: Container(
-                      width: double.infinity,
-                      // height: 300,
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xffff3a5a),
-                            Color(0xfffe494d),
-                          ],
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const <Widget>[
-                          SizedBox(
-                            height: 40,
-                          ),
-                          Icon(
-                            Icons.sports_football_sharp,
-                            color: Colors.white,
-                            size: 60,
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "Walktron",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 30),
-                          ),
+                ClipPath(
+                  clipper: WaveClipper1(),
+                  child: Container(
+                    width: double.infinity,
+                    // height: 300,
+                    // height: size.height * 0.3,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xffff3a5a),
+                          Color(0xfffe494d),
                         ],
                       ),
                     ),
                   ),
                 ),
+                Positioned(
+                  // bottom: 50,
+
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
+                      Spacer(),
+                      Icon(
+                        Icons.sports_football_sharp,
+                        color: Colors.white,
+                        size: 60,
+                      ),
+                      // // SizedBox(
+                      // //   height: 20,
+                      // // ),
+                      Text(
+                        "Walktron",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 30,
+                        ),
+                      ),
+                      Spacer()
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Material(
-              elevation: 2.0,
-              borderRadius: const BorderRadius.all(Radius.circular(30)),
-              child: TextField(
-                controller: controller.email,
-                onChanged: (String value) {},
-                cursorColor: Colors.deepOrange,
-                decoration: const InputDecoration(
-                    hintText: "Email",
-                    prefixIcon: Material(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      child: Icon(
-                        Icons.email,
-                        color: Colors.red,
+          Expanded(
+            flex: 5,
+            child: Column(
+              children: [
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Material(
+                    elevation: 2.0,
+                    borderRadius: const BorderRadius.all(Radius.circular(30)),
+                    child: TextField(
+                      controller: controller.email,
+                      onChanged: (String value) {},
+                      cursorColor: Colors.deepOrange,
+                      decoration: const InputDecoration(
+                          hintText: "Email",
+                          prefixIcon: Material(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                            child: Icon(
+                              Icons.email,
+                              color: Colors.red,
+                            ),
+                          ),
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 25, vertical: 13)),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                // const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Material(
+                    elevation: 2.0,
+                    borderRadius: const BorderRadius.all(Radius.circular(30)),
+                    child: TextField(
+                      controller: controller.pass,
+                      onChanged: (String value) {},
+                      cursorColor: Colors.deepOrange,
+                      decoration: const InputDecoration(
+                          hintText: "Password",
+                          prefixIcon: Material(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                            child: Icon(
+                              Icons.lock,
+                              color: Colors.red,
+                            ),
+                          ),
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 25, vertical: 13)),
+                    ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    const Spacer(),
+                    FlatButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Forgot Password ?',
+                        style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 25, vertical: 13)),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Material(
-              elevation: 2.0,
-              borderRadius: const BorderRadius.all(Radius.circular(30)),
-              child: TextField(
-                controller: controller.pass,
-                onChanged: (String value) {},
-                cursorColor: Colors.deepOrange,
-                decoration: const InputDecoration(
-                    hintText: "Password",
-                    prefixIcon: Material(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      child: Icon(
-                        Icons.lock,
-                        color: Colors.red,
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Container(
+                    width: double.maxFinite,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(100),
+                      ),
+                      color: Color(0xffff3a5a),
+                    ),
+                    child: FlatButton(
+                      onPressed: () {
+                        controller.login();
+                      },
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18),
                       ),
                     ),
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 25, vertical: 13)),
-              ),
+                  ),
+                ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                const HorizontalOrLine(height: 3, label: 'OR'),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                // const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Container(
+                    width: double.maxFinite,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(100),
+                      ),
+                      color: Color(0xffff3a5a),
+                    ),
+                    child: FlatButton.icon(
+                      icon: const FaIcon(FontAwesomeIcons.google),
+                      onPressed: () {},
+                      label: const Text(
+                        "Google",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const <Widget>[
+                    Text(
+                      "Don't have an Account ? ",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal),
+                    ),
+                    Text(
+                      "Sign Up ",
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                          decoration: TextDecoration.underline),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+              ],
             ),
-          ),
-          Row(
-            children: [
-              const Spacer(),
-              FlatButton(
-                onPressed: () {},
-                child: const Text(
-                  'Forgot Password ?',
-                  style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Container(
-              width: double.maxFinite,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(100),
-                ),
-                color: Color(0xffff3a5a),
-              ),
-              child: FlatButton(
-                onPressed: () {
-                  controller.login();
-                },
-                child: const Text(
-                  "Login",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const HorizontalOrLine(height: 3, label: 'OR'),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Container(
-              width: double.maxFinite,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(100),
-                ),
-                color: Color(0xffff3a5a),
-              ),
-              child: FlatButton.icon(
-                icon: const FaIcon(FontAwesomeIcons.google),
-                onPressed: () {},
-                label: const Text(
-                  "Google",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
-              Text(
-                "Don't have an Account ? ",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 12,
-                    fontWeight: FontWeight.normal),
-              ),
-              Text(
-                "Sign Up ",
-                style: TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    decoration: TextDecoration.underline),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 40,
-          ),
+          )
         ],
       ),
     );

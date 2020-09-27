@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
+import 'package:walktron/router.dart';
 
 import '../repository.dart';
 
@@ -22,5 +23,6 @@ class AuthController extends GetxController {
     final user = await repository.login(email.text, pass.text);
     // LocalService.instance.save(UserModel(name: null, uid: null, height: null, weight: null))
     print(user);
+    Get.toNamed(homeroute);
   }
 }
