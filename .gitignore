@@ -39,3 +39,7 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+
+# firebase google-services.json file which must be ignored
+android/app/google-services.json
+
