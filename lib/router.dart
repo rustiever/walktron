@@ -6,6 +6,7 @@ const String authroute = '/';
 const String homeroute = '/home';
 const String splashroute = 'splash';
 const String errorroute = 'error';
+const String signUpRoute = 'signUp';
 
 List<GetPage> routes() {
   return [
@@ -14,6 +15,8 @@ List<GetPage> routes() {
     //   page: () => ErrorScreen(),
     // ),
     GetPage(name: authroute, page: () => LoginView(), binding: AuthBinding()),
+    GetPage(
+        name: signUpRoute, page: () => SignUpView(), binding: AuthBinding()),
     GetPage(
       name: homeroute,
       page: () => HomeView(),

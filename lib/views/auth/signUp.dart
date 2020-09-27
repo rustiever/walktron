@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-
 import 'package:walktron/controllers/controllers.dart';
 import 'package:walktron/router.dart';
 import 'package:walktron/views/auth/widgets.dart';
 
-class LoginView extends GetView<AuthController> {
+class SignUpView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +22,6 @@ class LoginView extends GetView<AuthController> {
                   clipper: WaveClipper2(),
                   child: Container(
                     width: double.infinity,
-                    // height: size.height * 0.3,
                     decoration: const BoxDecoration(
                         gradient: LinearGradient(
                             colors: [Color(0x22ff3a5a), Color(0x22fe494d)])),
@@ -33,8 +31,6 @@ class LoginView extends GetView<AuthController> {
                   clipper: WaveClipper3(),
                   child: Container(
                     width: double.infinity,
-                    // height: 300,
-                    // height: size.height * 0.3,
                     decoration: const BoxDecoration(
                         gradient: LinearGradient(
                             colors: [Color(0x44ff3a5a), Color(0x44fe494d)])),
@@ -44,8 +40,6 @@ class LoginView extends GetView<AuthController> {
                   clipper: WaveClipper1(),
                   child: Container(
                     width: double.infinity,
-                    // height: 300,
-                    // height: size.height * 0.3,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -57,23 +51,14 @@ class LoginView extends GetView<AuthController> {
                   ),
                 ),
                 Positioned(
-                  // bottom: 50,
-
                   child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.center,
                     children: const <Widget>[
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
                       Spacer(),
                       Icon(
                         Icons.sports_football_sharp,
                         color: Colors.white,
                         size: 60,
                       ),
-                      // // SizedBox(
-                      // //   height: 20,
-                      // // ),
                       Text(
                         "Walktron",
                         style: TextStyle(
@@ -121,7 +106,6 @@ class LoginView extends GetView<AuthController> {
                 const SizedBox(
                   height: 10,
                 ),
-                // const Spacer(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Material(
@@ -146,20 +130,8 @@ class LoginView extends GetView<AuthController> {
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    const Spacer(),
-                    FlatButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Forgot Password ?',
-                        style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  ],
+                const SizedBox(
+                  height: 10,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -176,23 +148,17 @@ class LoginView extends GetView<AuthController> {
                         controller.login();
                       },
                       child: const Text(
-                        "Login",
+                        "Sign Up",
                         style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18),
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          // fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
                 ),
-                // const SizedBox(
-                //   height: 20,
-                // ),
                 const HorizontalOrLine(height: 3, label: 'OR'),
-                // const SizedBox(
-                //   height: 20,
-                // ),
-                // const Spacer(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Container(
@@ -204,14 +170,18 @@ class LoginView extends GetView<AuthController> {
                       color: Color(0xffff3a5a),
                     ),
                     child: FlatButton.icon(
-                      icon: const FaIcon(FontAwesomeIcons.google),
+                      icon: const FaIcon(
+                        FontAwesomeIcons.google,
+                        color: Colors.white,
+                      ),
                       onPressed: () {},
                       label: const Text(
                         "Google",
                         style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18),
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          // fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
@@ -223,18 +193,16 @@ class LoginView extends GetView<AuthController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const Text(
-                      "Don't have an Account ?  ",
+                      "Already have an Account ? ",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 12,
                           fontWeight: FontWeight.normal),
                     ),
                     InkWell(
-                      onTap: () {
-                        Get.offAndToNamed(signUpRoute);
-                      },
+                      onTap: () => Get.offAndToNamed(authroute),
                       child: const Text(
-                        "Sign Up ",
+                        "Login ",
                         style: TextStyle(
                             color: Colors.red,
                             fontWeight: FontWeight.w500,
@@ -253,121 +221,3 @@ class LoginView extends GetView<AuthController> {
     );
   }
 }
-
-// class WaveClipper1 extends CustomClipper<Path> {
-//   @override
-//   Path getClip(Size size) {
-//     final path = Path();
-//     path.lineTo(0.0, size.height - 50);
-
-//     final firstEndPoint = Offset(size.width * 0.6, size.height - 29 - 50);
-//     final firstControlPoint = Offset(size.width * .25, size.height - 60 - 50);
-//     path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
-//         firstEndPoint.dx, firstEndPoint.dy);
-
-//     final secondEndPoint = Offset(size.width, size.height - 60);
-//     final secondControlPoint = Offset(size.width * 0.84, size.height - 50);
-//     path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
-//         secondEndPoint.dx, secondEndPoint.dy);
-//     path.lineTo(size.width, size.height);
-//     path.lineTo(size.width, 0);
-//     path.close();
-//     return path;
-//   }
-
-//   @override
-//   bool shouldReclip(CustomClipper<Path> oldClipper) {
-//     return false;
-//   }
-// }
-
-// class WaveClipper3 extends CustomClipper<Path> {
-//   @override
-//   Path getClip(Size size) {
-//     final path = Path();
-//     path.lineTo(0.0, size.height - 50);
-
-//     final firstEndPoint = Offset(size.width * 0.6, size.height - 15 - 50);
-//     final firstControlPoint = Offset(size.width * .25, size.height - 60 - 50);
-//     path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
-//         firstEndPoint.dx, firstEndPoint.dy);
-
-//     final secondEndPoint = Offset(size.width, size.height - 40);
-//     final secondControlPoint = Offset(size.width * 0.84, size.height - 30);
-//     path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
-//         secondEndPoint.dx, secondEndPoint.dy);
-//     path.lineTo(size.width, size.height);
-//     path.lineTo(size.width, 0);
-//     path.close();
-//     return path;
-//   }
-
-//   @override
-//   bool shouldReclip(CustomClipper<Path> oldClipper) {
-//     return false;
-//   }
-// }
-
-// class WaveClipper2 extends CustomClipper<Path> {
-//   @override
-//   Path getClip(Size size) {
-//     final path = Path();
-//     path.lineTo(0.0, size.height - 50);
-
-//     final firstEndPoint = Offset(size.width * .7, size.height - 40);
-//     final firstControlPoint = Offset(size.width * .25, size.height);
-//     path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
-//         firstEndPoint.dx, firstEndPoint.dy);
-
-//     final secondEndPoint = Offset(size.width, size.height - 45);
-//     final secondControlPoint = Offset(size.width * 0.84, size.height - 50);
-//     path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
-//         secondEndPoint.dx, secondEndPoint.dy);
-//     path.lineTo(size.width, size.height);
-//     path.lineTo(size.width, 0);
-//     path.close();
-//     return path;
-//   }
-
-//   @override
-//   bool shouldReclip(CustomClipper<Path> oldClipper) {
-//     return false;
-//   }
-// }
-
-// class HorizontalOrLine extends StatelessWidget {
-//   const HorizontalOrLine({
-//     this.label,
-//     this.height,
-//   });
-
-//   final String label;
-//   final double height;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(children: <Widget>[
-//       Expanded(
-//         child: Container(
-//             margin: const EdgeInsets.only(left: 10.0, right: 15.0),
-//             child: Divider(
-//               color: Colors.black,
-//               height: height,
-//             )),
-//       ),
-//       Text(
-//         label,
-//         style: const TextStyle(
-//             color: Colors.red, fontSize: 20, fontWeight: FontWeight.w700),
-//       ),
-//       Expanded(
-//         child: Container(
-//             margin: const EdgeInsets.only(left: 15.0, right: 10.0),
-//             child: Divider(
-//               color: Colors.black,
-//               height: height,
-//             )),
-//       ),
-//     ]);
-//   }
-// }
