@@ -1,28 +1,45 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
-import 'package:walktron/router.dart';
-
+import 'package:walktron/models/models.dart';
 import '../repository.dart';
 
 class AuthController extends GetxController {
   static AuthController to = Get.find();
   final Repository repository;
   AuthController({@required this.repository}) : assert(repository != null);
+  UserModel user;
   TextEditingController email;
   TextEditingController pass;
 
   @override
   void onInit() {
+    user = _getUser();
     email = TextEditingController();
     pass = TextEditingController();
     super.onInit();
   }
 
-  Future<void> login() async {
-    final user = await repository.login(email.text, pass.text);
-    // LocalService.instance.save(UserModel(name: null, uid: null, height: null, weight: null))
-    print(user);
-    Get.toNamed(homeroute);
+  @override
+  FutureOr onClose() {
+    email.dispose();
+    pass.dispose();
+    return super.onClose();
   }
+
+  UserModel _getUser() => repository.getUser();
+
+  void signUp() => repository.signUp(email.text, pass.text);
+
+  void googleSignIn() => repository.googleSignIn();
+
+  void login() {
+    repository.login(email.text, pass.text);
+    print(email.text);
+    print(user);
+  }
+
+  void logout() => repository.logout();
 }

@@ -10,7 +10,7 @@ class AuthBinding implements Bindings {
     Get.lazyPut<AuthController>(() {
       Get.put(FirebaseService(), permanent: true);
       Get.put(Repository(Get.find()), permanent: true);
-      return Get.put(AuthController(repository: Get.find()));
+      return Get.put(AuthController(repository: Get.find()), permanent: true);
     });
   }
 }

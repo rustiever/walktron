@@ -5,15 +5,23 @@ import '../models/models.dart';
 class LocalService {
   LocalService._private();
   static LocalService instance = LocalService._private();
-  GetStorage box = GetStorage();
+  final GetStorage _box = GetStorage();
+  Future<void> clearLocalData() async {
+    await _box.erase();
+  }
+
   Future<void> save(UserModel user) async {
-    await box.write('user', user);
+    await _box.write('user', user.toJson());
+    print(_box.read('user'));
+    print(getUser());
   }
 
   UserModel getUser() {
-    final UserModel user = box.read('user');
+    final Map<String, dynamic> user = _box.read('user');
+    print('${user}null');
     if (user != null) {
-      return user;
+      print(user);
+      return UserModel.fromJson(user);
     }
     return null;
   }

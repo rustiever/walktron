@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'bindings/bindings.dart';
 import 'views/views.dart';
 
-const String authroute = '/';
+const String loginRoute = '/';
 const String homeroute = '/home';
 const String splashroute = 'splash';
 const String errorroute = 'error';
@@ -14,7 +14,7 @@ List<GetPage> routes() {
     //   name: errorroute,
     //   page: () => ErrorScreen(),
     // ),
-    GetPage(name: authroute, page: () => LoginView(), binding: AuthBinding()),
+    GetPage(name: loginRoute, page: () => LoginView(), binding: AuthBinding()),
     GetPage(
         name: signUpRoute, page: () => SignUpView(), binding: AuthBinding()),
     GetPage(

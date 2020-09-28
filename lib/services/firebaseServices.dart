@@ -1,16 +1,41 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:walktron/models/models.dart';
+import 'package:walktron/services/localService.dart';
+
+import '../router.dart';
 
 class FirebaseService {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   FirebaseService({FirebaseAuth firebaseAuth, GoogleSignIn googleSignin})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _googleSignIn = googleSignin ?? GoogleSignIn();
 
   Stream<User> get user => _firebaseAuth.authStateChanges();
+
+  Future<void> _addUserToDB(UserCredential userCredential) async {
+    final CollectionReference userCollection = _firestore.collection('users');
+    final user = UserModel(
+        name: userCredential.user.displayName,
+        uid: userCredential.user.uid,
+        height: null,
+        weight: null,
+        age: null);
+    await userCollection.doc(userCredential.user.uid).set(user.toJson());
+    // await _getUserFromDB(userCredential.user.uid);
+  }
+
+  Future<void> _getUserFromDB(String uid) async {
+    final CollectionReference userCollection = _firestore.collection('users');
+    final user = UserModel.fromJson(
+      (await userCollection.doc(uid).get()).data(),
+    );
+    await LocalService.instance.save(user);
+  }
 
   void authStateChanges() {
     _firebaseAuth.authStateChanges().listen((User user) {
@@ -25,10 +50,16 @@ class FirebaseService {
   Future<void> signOut() async {
     try {
       print("firebase User Sign Out");
-      await _googleSignIn.disconnect();
-      await _googleSignIn.signOut();
-      return await _firebaseAuth.signOut();
+      print(LocalService.instance.getUser());
+      await LocalService.instance.clearLocalData();
+      if (_googleSignIn.currentUser != null) {
+        await _googleSignIn.disconnect();
+        await _googleSignIn.signOut();
+      }
+      await _firebaseAuth.signOut();
+      await Get.offNamedUntil(loginRoute, (route) => false);
     } catch (e) {
+      print('logout problem');
       print(e);
     }
   }
@@ -48,7 +79,14 @@ class FirebaseService {
     );
     // Once signed in, return the UserCredential
     try {
-      await _firebaseAuth.signInWithCredential(credential);
+      final UserCredential userCredential =
+          await _firebaseAuth.signInWithCredential(credential);
+      print(user);
+      if (userCredential.additionalUserInfo.isNewUser) {
+        await _addUserToDB(userCredential);
+      }
+      _getUserFromDB(userCredential.user.uid);
+      await Get.toNamed(homeroute);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-exists-with-different-credential') {
         // The account already exists with a different credential
@@ -88,34 +126,37 @@ class FirebaseService {
       // ignore: unused_local_variable
       final UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
+      await _addUserToDB(userCredential);
+      await _getUserFromDB(userCredential.user.uid);
+      await Get.toNamed(homeroute);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
+        print(e.code);
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
+        print(e.code);
+      } else {
+        print(e.code);
       }
     } catch (e) {
       print(e.toString());
     }
   }
 
-  Future<UserCredential> signInWithEmailAndPassword(
-      String email, String password) async {
+  Future<void> signInWithEmailAndPassword(String email, String password) async {
     try {
       final UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
       print(userCredential.user);
-      return userCredential;
+      await _getUserFromDB(userCredential.user.uid);
+      await Get.toNamed(homeroute);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
-        return null;
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
-        return null;
-      } else {
-        return null;
-      }
+      } else {}
     }
   }
 }
