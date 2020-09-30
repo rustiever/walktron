@@ -1,28 +1,30 @@
 import 'package:animations/animations.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/state_manager.dart';
 import 'package:walktron/views/views.dart';
 
 class HomeView extends StatelessWidget {
   final tab = [
-    const Center(
-      child: Icon(Icons.add, size: 30),
-    ),
+    AddDevicesView(),
+    DashboardView(),
+    ActivityView(),
     const Center(
       child: Icon(Icons.face, size: 30),
     ),
+
     // Center(
     //   child: RaisedButton(onPressed: () {
     //     AuthController.to.logout();
     //   }),
     // ),
-    ProfileView()
+    // ProfileView()
   ];
   @override
   Widget build(BuildContext context) {
     return ValueBuilder(
-      initialValue: 0,
+      initialValue: 1,
       builder: (snapshot, void Function(dynamic) updater) => Scaffold(
         body: PageTransitionSwitcher(
           duration: const Duration(milliseconds: 350),
@@ -44,11 +46,10 @@ class HomeView extends StatelessWidget {
           items: const <Widget>[
             Icon(Icons.add, size: 30),
             Icon(Icons.home, size: 30),
+            Icon(FontAwesomeIcons.ankh, size: 30),
             Icon(Icons.person, size: 30),
           ],
-          onTap: (index) {
-            updater(index);
-          },
+          onTap: (index) => updater(index),
         ),
       ),
     );

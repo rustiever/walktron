@@ -21,8 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  fl_chart: 0.11.1
   flutter_bluetooth_serial: 0.2.2
-  flutter_reactive_ble: 2.5.0
   flutter_blue: 0.7.2
   animations: 1.1.2
   curved_navigation_bar: 0.3.4
