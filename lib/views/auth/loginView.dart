@@ -7,6 +7,7 @@ import 'package:walktron/views/auth/widgets.dart';
 
 class LoginView extends GetView<AuthController> {
   final _formKey = GlobalKey<FormState>();
+  // final _enable = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,8 +102,11 @@ class LoginView extends GetView<AuthController> {
                               ? null
                               : "don't you have patience to enter proper email";
                         },
+                        textInputAction: TextInputAction.next,
+                        autofocus: true,
                         controller: controller.email,
-                        onChanged: (String value) {},
+                        autocorrect: false,
+                        // onChanged: (String value) {},
                         cursorColor: Colors.deepOrange,
                         decoration: const InputDecoration(
                           hintText: "Email",
@@ -134,11 +138,14 @@ class LoginView extends GetView<AuthController> {
                             return 'enter something to validate';
                           }
                           return GetUtils.isLengthGreaterOrEqual(value, 3)
-                              ? null
+                              ? null 
                               : "can't you enter a proper password";
-                        },
+                        } ,
                         controller: controller.pass,
-                        onChanged: (String value) {},
+                        obscureText: true,
+                        // onChanged: (String value) {},
+                        //Disabling the edition will be done soon for password after once writing...
+
                         cursorColor: Colors.deepOrange,
                         decoration: const InputDecoration(
                             hintText: "Password",

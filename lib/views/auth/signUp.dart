@@ -96,6 +96,8 @@ class SignUpView extends GetView<AuthController> {
                               ? null
                               : "don't you have patience to enter proper email";
                         },
+                        textInputAction: TextInputAction.next,
+                        autofocus: true,
                         controller: controller.email,
                         onChanged: (String value) {},
                         cursorColor: Colors.deepOrange,
@@ -133,6 +135,7 @@ class SignUpView extends GetView<AuthController> {
                               : "can't you enter a proper password";
                         },
                         controller: controller.pass,
+                        obscureText: true,
                         onChanged: (String value) {},
                         cursorColor: Colors.deepOrange,
                         decoration: const InputDecoration(
