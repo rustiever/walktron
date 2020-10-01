@@ -6,20 +6,20 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:walktron/router.dart';
 
-// Future<void> main() async {
-//   await init();
-//   runApp(
-//     DevicePreview(
-//       enabled: !kReleaseMode,
-//       builder: (context) => Walktorn(),
-//     ),
-//   );
-// }
-
 Future<void> main() async {
   await init();
-  runApp(Walktorn());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => Walktorn(),
+    ),
+  );
 }
+
+// Future<void> main() async {
+//   await init();
+//   runApp(Walktorn());
+// }
 
 Future<void> init() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +34,7 @@ class Walktorn extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Walktron',
-      initialRoute: loginRoute,
+      initialRoute: homeroute,
       getPages: routes(),
       theme: ThemeData(
         primarySwatch: Colors.blue,

@@ -21,7 +21,7 @@ List<GetPage> routes() {
     GetPage(
       name: homeroute,
       page: () => HomeView(),
-      bindings: [],
+      bindings: [AuthBinding()],
     ),
   ];
 }
