@@ -135,21 +135,35 @@ class SignUpView extends GetView<AuthController> {
                               : "can't you enter a proper password";
                         },
                         controller: controller.pass,
-                        obscureText: true,
+                        obscureText: controller.passVisible.value,
                         onChanged: (String value) {},
                         cursorColor: Colors.deepOrange,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             hintText: "Password",
-                            prefixIcon: Material(
+                            prefixIcon: const Material(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30)),
-                              child: Icon(
+                              child:  Icon(
                                 Icons.lock,
                                 color: Colors.red,
                               ),
                             ),
+                            suffixIcon: Material(
+                              borderRadius:
+                                   const BorderRadius.all(Radius.circular(30)),
+                              child: Obx(
+                                () => IconButton(
+                                  icon: Icon(controller.passVisible.value
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  onPressed: () {
+                                    controller.passVisible.toggle();
+                                  },
+                                ),
+                              ),
+                            ),
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 25, vertical: 13)),
                       ),
                     ),
