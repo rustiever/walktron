@@ -7,6 +7,7 @@ import 'package:walktron/views/auth/widgets.dart';
 
 class LoginView extends GetView<AuthController> {
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,8 +102,10 @@ class LoginView extends GetView<AuthController> {
                               ? null
                               : "don't you have patience to enter proper email";
                         },
+                        textInputAction: TextInputAction.next,
+                        autofocus: true,
                         controller: controller.email,
-                        onChanged: (String value) {},
+                        // onChanged: (String value) {},
                         cursorColor: Colors.deepOrange,
                         decoration: const InputDecoration(
                           hintText: "Email",
@@ -138,11 +141,17 @@ class LoginView extends GetView<AuthController> {
                               : "can't you enter a proper password";
                         },
                         controller: controller.pass,
-                        onChanged: (String value) {},
+                        obscureText: controller.passVisible.value,
+                        textInputAction: TextInputAction.done,
+                        // obscureText: controller.passwordInVisible,
+
+                        // onChanged: (String value) {},
+                        //Disabling the edition will be done soon for password after once writing...
+
                         cursorColor: Colors.deepOrange,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                             hintText: "Password",
-                            prefixIcon: Material(
+                            prefixIcon: const Material(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30)),
                               child: Icon(
@@ -150,8 +159,22 @@ class LoginView extends GetView<AuthController> {
                                 color: Colors.red,
                               ),
                             ),
+                            suffixIcon: Material(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(30)),
+                              child: Obx(
+                                () => IconButton(
+                                  icon: Icon(controller.passVisible.value
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  onPressed: () {
+                                    controller.passVisible.toggle();
+                                  },
+                                ),
+                              ),
+                            ),
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 25, vertical: 13)),
                       ),
                     ),

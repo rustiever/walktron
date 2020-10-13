@@ -13,6 +13,7 @@ class AuthController extends GetxController {
   UserModel user;
   TextEditingController email;
   TextEditingController pass;
+  final passVisible = true.obs;
 
   @override
   void onInit() {

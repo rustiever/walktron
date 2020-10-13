@@ -61,6 +61,12 @@ class FirebaseService {
     } catch (e) {
       print('logout problem');
       print(e);
+      Get.snackbar(
+        'snack-5',
+        'logout problem',
+        duration: const Duration(milliseconds: 5),
+        snackPosition: SnackPosition.TOP,
+      );
     }
   }
 
@@ -131,11 +137,22 @@ class FirebaseService {
       await Get.toNamed(homeroute);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-        print(e.code);
+        // print('The password provided is too weak.');
+        // print(e.code);
+        Get.snackbar(
+          'snack-3',
+          'The password provided is too weak.',
+          duration: const Duration(milliseconds: 5),
+          snackPosition: SnackPosition.TOP,
+        );
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-        print(e.code);
+        // print('The account already exists for that email.');
+        // print(e.code);
+        Get.snackbar(
+          'snack-4',
+          'The account already exists for that email.',
+          duration: const Duration(milliseconds: 5),
+        );
       } else {
         print(e.code);
       }
@@ -153,9 +170,21 @@ class FirebaseService {
       await Get.toNamed(homeroute);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        // print('No user found for that email.');
+        Get.snackbar(
+          'snack-1',
+          'No user found for that email.',
+          duration: const Duration(milliseconds: 5),
+          snackPosition: SnackPosition.TOP,
+        );
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        // print('Wrong password provided for that user.');
+        Get.snackbar(
+          'snack-2',
+          'Wrong password provided for that user.',
+          duration: const Duration(milliseconds: 5),
+          snackPosition: SnackPosition.TOP,
+        );
       } else {}
     }
   }
