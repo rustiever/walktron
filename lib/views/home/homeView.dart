@@ -13,7 +13,6 @@ class HomeView extends StatelessWidget {
     const Center(
       child: Icon(Icons.face, size: 30),
     ),
-
     // Center(
     //   child: RaisedButton(onPressed: () {
     //     AuthController.to.logout();
