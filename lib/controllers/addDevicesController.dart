@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 
@@ -14,8 +12,8 @@ class AddDevicesController extends GetxController {
   // }
 
   @override
-  FutureOr onClose() {
+  void onClose() {
     animationController.dispose();
-    return super.onClose();
+    super.onClose();
   }
 }

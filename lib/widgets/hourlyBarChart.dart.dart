@@ -40,7 +40,7 @@ class HourlyBarChartWidget extends StatelessWidget {
       barRods: [
         BarChartRodData(
           y: y,
-          color: Colors.pinkAccent,
+          colors: [Colors.pinkAccent],
           width: 7.0,
         ),
       ],
@@ -60,8 +60,8 @@ class HourlyBarChartWidget extends StatelessWidget {
       // Build X Axis here.
       bottomTitles: SideTitles(
         showTitles: true,
-        textStyle: const TextStyle(
-            color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 14),
+        // getTextStyles: const TextStyle(
+        //     color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 14),
         margin: 12,
         getTitles: (double value) {
           switch (value.toInt()) {

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+
 import 'bindings/bindings.dart';
+import 'controllers/controllers.dart';
 import 'views/views.dart';
 
 const String loginRoute = '/';
@@ -21,7 +23,10 @@ List<GetPage> routes() {
     GetPage(
       name: homeroute,
       page: () => HomeView(),
-      bindings: [AuthBinding()],
+      bindings: [
+        AuthBinding(),
+        BindingsBuilder.put(() => BluetoothController())
+      ],
     ),
   ];
 }

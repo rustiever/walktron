@@ -34,7 +34,7 @@ class Walktron extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Walktron',
-      initialRoute: loginRoute,
+      initialRoute: homeroute,
       getPages: routes(),
       theme: ThemeData(
         primarySwatch: Colors.blue,

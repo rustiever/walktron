@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:walktron/controllers/controllers.dart';
 
 class DashboardView extends StatelessWidget {
+  final BluetoothController _bluetoothController = Get.find();
   final TextStyle whiteText = const TextStyle(color: Colors.white);
   @override
   Widget build(BuildContext context) {
@@ -36,15 +39,26 @@ class DashboardView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           ListTile(
-                            title: Text(
-                              "9,850",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4
-                                  .copyWith(
-                                    color: Colors.white,
-                                    fontSize: 24.0,
-                                  ),
+                            title: InkWell(
+                              onDoubleTap: () {
+                                _bluetoothController
+                                    .sendMessageToBluetooth('1');
+                                // _bluetoothController.steps.value++;
+                              },
+                              child: Obx(
+                                () => Text(
+                                  // "9,850",
+                                  _bluetoothController.steps.value,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline4
+                                      .copyWith(
+                                        color: Colors.white,
+                                        fontSize: 24.0,
+                                      ),
+                                ),
+                              ),
                             ),
                             trailing: const Icon(
                               FontAwesomeIcons.walking,
@@ -62,36 +76,41 @@ class DashboardView extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 10.0),
-                    Container(
-                      height: 120,
-                      color: Colors.green,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          ListTile(
-                            title: Text(
-                              "70 bpm",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4
-                                  .copyWith(
-                                    color: Colors.white,
-                                    fontSize: 24.0,
-                                  ),
+                    InkWell(
+                      onDoubleTap: () =>
+                          _bluetoothController.sendMessageToBluetooth('z'),
+                      // _bluetoothController.disconnect(),
+                      child: Container(
+                        height: 120,
+                        color: Colors.green,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            ListTile(
+                              title: Text(
+                                "70 bpm",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline4
+                                    .copyWith(
+                                      color: Colors.white,
+                                      fontSize: 24.0,
+                                    ),
+                              ),
+                              trailing: const Icon(
+                                FontAwesomeIcons.heartbeat,
+                                color: Colors.white,
+                              ),
                             ),
-                            trailing: const Icon(
-                              FontAwesomeIcons.heartbeat,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Text(
-                              'Avg. Heart Rate',
-                              style: whiteText,
-                            ),
-                          )
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.only(left: 16.0),
+                              child: Text(
+                                'Avg. Heart Rate',
+                                style: whiteText,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],

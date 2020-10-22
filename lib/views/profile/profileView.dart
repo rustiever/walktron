@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:walktron/controllers/profileController.dart';
+import 'package:walktron/controllers/controllers.dart';
 import 'package:walktron/widgets/widgets.dart';
 
 class ProfileView extends StatelessWidget {
@@ -48,7 +48,6 @@ class ProfileView extends StatelessWidget {
                             const SizedBox(
                               height: 5.0,
                             ),
-                            // Text("UI/UX designer | Foodie | Kathmandu"),
                             const SizedBox(
                               height: 16.0,
                             ),

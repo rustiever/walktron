@@ -41,12 +41,12 @@ class WeeklyBarChartWidget extends StatelessWidget {
       barRods: [
         BarChartRodData(
           y: y,
-          color: Colors.cyan,
+          colors: [Colors.cyan],
           width: 15.0,
           // Background bar.
           backDrawRodData: BackgroundBarChartRodData(
               show: true,
-              color: Colors.cyan.withOpacity(0.2),
+              colors: [Colors.cyan.withOpacity(0.2)],
               y: maximumValueOnYAxis),
         ),
       ],
@@ -67,8 +67,8 @@ class WeeklyBarChartWidget extends StatelessWidget {
       // Build X Axis here.
       bottomTitles: SideTitles(
         showTitles: true,
-        textStyle: const TextStyle(
-            color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 14),
+        // getTextStyles: const TextStyle(
+        //     color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 14),
         margin: 12,
         getTitles: (double value) {
           switch (value.toInt()) {

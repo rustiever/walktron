@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:walktron/controllers/controllers.dart';
 import 'package:walktron/widgets/widgets.dart';
 
 class AddDevicesView extends StatefulWidget {
@@ -8,6 +12,7 @@ class AddDevicesView extends StatefulWidget {
 
 class _AddDevicesViewState extends State<AddDevicesView>
     with SingleTickerProviderStateMixin {
+  final BluetoothController _bluetoothController = Get.find();
   AnimationController _controller;
   @override
   void initState() {
@@ -35,17 +40,54 @@ class _AddDevicesViewState extends State<AddDevicesView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: InkWell(
-        onDoubleTap: () => _controller.reset(),
-        child: SafeArea(
-          child: CustomPaint(
-            painter: SpritePainter(_controller),
-            child: const SizedBox(
-              height: 400,
-              width: 400,
-            ),
+      body: Column(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Stack(
+            children: [
+              InkWell(
+                onDoubleTap: () => _controller.reset(),
+                child: SafeArea(
+                  child: CustomPaint(
+                    painter: SpritePainter(_controller),
+                    child: const SizedBox(
+                      height: 400,
+                      width: 400,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
+          Container(
+            height: 300,
+            child: Obx(
+              () => ListView(
+                children: List.generate(
+                  _bluetoothController.devicesList.length,
+                  (index) {
+                    final BluetoothDevice device = _bluetoothController
+                        .devicesList[index] as BluetoothDevice;
+                    return ListTile(
+                      title: Text(device.name),
+                      subtitle: Text(
+                        _bluetoothController.isButtonUnavailable.value
+                            .toString(),
+                      ),
+                      trailing: IconButton(
+                        icon: const FaIcon(FontAwesomeIcons.megaport),
+                        onPressed: () =>
+                            !_bluetoothController.isButtonUnavailable.value
+                                ? _bluetoothController.connect(device)
+                                : null,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

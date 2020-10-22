@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
@@ -24,10 +22,10 @@ class AuthController extends GetxController {
   }
 
   @override
-  FutureOr onClose() {
+  void onClose() {
     email.dispose();
     pass.dispose();
-    return super.onClose();
+    super.onClose();
   }
 
   UserModel _getUser() => repository.getUser();

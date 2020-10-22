@@ -92,7 +92,7 @@ class FirebaseService {
         await _addUserToDB(userCredential);
       }
       _getUserFromDB(userCredential.user.uid);
-      await Get.toNamed(homeroute);
+      await Get.offAndToNamed(homeroute);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-exists-with-different-credential') {
         // The account already exists with a different credential

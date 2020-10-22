@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:walktron/repository.dart';
@@ -28,11 +26,11 @@ class ProfileController extends GetxController {
   }
 
   @override
-  FutureOr onClose() {
+  void onClose() {
     name.dispose();
     height.dispose();
     weight.dispose();
     age.dispose();
-    return super.onClose();
+    super.onClose();
   }
 }
