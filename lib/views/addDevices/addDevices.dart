@@ -46,7 +46,10 @@ class _AddDevicesViewState extends State<AddDevicesView>
           Stack(
             children: [
               InkWell(
-                onDoubleTap: () => _controller.reset(),
+                onDoubleTap: () {
+                  _controller.reset();
+                  _bluetoothController.disconnect();
+                },
                 child: SafeArea(
                   child: CustomPaint(
                     painter: SpritePainter(_controller),

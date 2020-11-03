@@ -105,6 +105,7 @@ class BluetoothController extends GetxController {
             //     ) ??
             //     120;
             steps.value = ascii.decode(data);
+            print("steps ${steps.value}");
             // connection.output.add(data); // Sending data
             // connection.output.add(utf8.encode('0'));
             if (ascii.decode(data).contains('!')) {
@@ -117,9 +118,6 @@ class BluetoothController extends GetxController {
             } else {
               print('Disconnected remotely!');
             }
-            // if (this.mounted) {
-            //   setState(() {});
-            // }
           });
         }).catchError((error) {
           print('Cannot connect, exception occurred');
